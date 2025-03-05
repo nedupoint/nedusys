@@ -18,7 +18,9 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/gensys/main.zig"),
         .target = target,
         .optimize = optimize,
+        .link_libc = true,
     });
+    utils_mod.addImport("luajit", luajit);
     gensys.root_module.addImport("luajit", luajit);
     gensys.root_module.addImport("utils", utils_mod);
     b.installArtifact(gensys);
